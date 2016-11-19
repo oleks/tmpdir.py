@@ -58,7 +58,7 @@ def do_with_tmpdir(args, tmpdir):
   command = [args.command] + args.args
 
   proc = subprocess.Popen(command, cwd=cwd, env=env)
-  proc.wait()
+  return proc.wait()
 
 def main_with_args(args):
   dir=tempfile.gettempdir()
@@ -73,12 +73,15 @@ def main_with_args(args):
   if args.suffix:
     suffix=args.suffix
 
+  retval = 0
   tmpdir = tempfile.mkdtemp(
     dir=dir, prefix=prefix, suffix=suffix)
   try:
-    do_with_tmpdir(args, tmpdir)
+    retval = do_with_tmpdir(args, tmpdir)
   finally:
     shutil.rmtree(tmpdir)
+
+  return retval
 
 def main():
   parser = argparse.ArgumentParser(
@@ -118,7 +121,8 @@ Do something with a temporary directory (TMPDIR).
     help="set the environment variable TMPDIR to the absolute path to " +
          "the created tmpdir")
   args = parser.parse_args()
-  main_with_args(args)
+
+  sys.exit(main_with_args(args))
 
 if __name__ == "__main__":
   main()
