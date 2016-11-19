@@ -20,7 +20,7 @@ offered by a good old subprocess.
 [tmpdir](tmpdir) aims to be cross-platform and easy to use: [tmpdir](tmpdir) is
 a small, self-contained Python executable. This makes it easy to just copy
 [tmpdir](tmpdir) into your source tree and use it. (The [Makefile](Makefile) is
-for testing purposes only.
+for testing purposes only.)
 
 [![Build Status](https://travis-ci.org/oleks/tmpdir.svg?branch=master)](https://travis-ci.org/oleks/tmpdir)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/oleks/tmpdir/blob/master/tmpdir)
