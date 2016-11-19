@@ -4,8 +4,10 @@ A subprocess is often an ideal wrapper for a given task.
 
 An often sought for wrapper is that of creating a temporary directory to make
 room for some scratch-space to work with, and to purge the directory when the
-task is done. Although popular programming languages have mechanisms for doing
-this inside the language (e.g., a
+task is done.
+
+Although popular programming languages have mechanisms for doing this inside
+the language (e.g., a
 [try-catch-finally](https://en.wikipedia.org/w/index.php?title=Exception_handling_syntax&oldid=736583603),
 or
 [defer](https://web.archive.org/web/20160419202839/http://blog.golang.org/defer-panic-and-recover)
