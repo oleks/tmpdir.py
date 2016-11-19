@@ -17,8 +17,8 @@ the one that a comes by merely spawning off a subprocess.
 
 [tmpdir](tmpdir) leverages the widely accessible process abstraction instead.
 
-[tmpdir](tmpdir) aims to be cross-platform and easy to use. This is done by
-using Python, keeping the program small, and contained in one file. To use
-[tmpdir](tmpdir) you can just copy it into your source tree.
+[tmpdir](tmpdir) aims to be cross-platform and easy to use: [tmpdir](tmpdir) is
+a small, self-contained Python executable. This makes it easy to just copy
+[tmpdir](tmpdir) into your source tree and use it.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/oleks/tmpdir/blob/master/tmpdir)
