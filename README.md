@@ -12,8 +12,8 @@ the language (e.g., a
 or
 [defer](https://web.archive.org/web/20160419202839/http://blog.golang.org/defer-panic-and-recover)
 statement), there is ill support for this across language barriers. Besides,
-most programming languages have a hard time offering a security barrier like
-the one that a comes by merely spawning off a subprocess.
+most programming languages have a hard time offering a barrier like the one
+offered by a good old subprocess.
 
 [tmpdir](tmpdir) leverages the widely accessible process abstraction instead.
 
