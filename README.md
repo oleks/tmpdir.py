@@ -33,7 +33,13 @@ created temporary directory and execute the command in there:
 
 ```
 ~$ tmpdir bash
-/tmp/tmpPOFIGL$ 
+/tmp/tmpPOFIGL$ exit
+~$ tmpdir pwd
+/tmp/tmp7x_3Qj
+~$ file /tmp/tmpdJCHRW
+/tmp/tmpdJCHRW: cannot open `/tmp/tmpdJCHRW' (No such file or directory)
+~$ file /tmp/tmp7x_3Qj
+/tmp/tmp7x_3Qj: cannot open `/tmp/tmp7x_3Qj' (No such file or directory)
 ```
 
 You can also copy a file or directory (e.g., student submission) into the temporary
