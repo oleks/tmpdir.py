@@ -22,3 +22,27 @@ a small, self-contained Python executable. This makes it easy to just copy
 [tmpdir](tmpdir) into your source tree and use it.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/oleks/tmpdir/blob/master/tmpdir)
+
+## Exploratory Examples
+
+The following examples assume that you've added the path to [tmpdir](tmpdir) to
+your `PATH` environment variable.
+
+Prefixing your command with `tmpdir` will change working directory to the
+created temporary directory and execute the command in there:
+
+```
+~$ tmpdir bash
+/tmp/tmpPOFIGL$ 
+```
+
+You can also copy a file or directory (e.g., student submission) into the temporary
+directory with the `-c|--copy` argument:
+
+```
+~$ tmpdir --copy /etc/passwd bash
+/tmp/tmpLVfhmy$ ls
+passwd
+/tmp/tmpLVfhmy$ diff -u passwd /etc/passwd
+/tmp/tmpLVfhmy$
+```
