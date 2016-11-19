@@ -9,8 +9,9 @@ task is done.
 Although popular programming languages have mechanisms for doing this inside
 the language (e.g., a
 [try-catch-finally](https://en.wikipedia.org/w/index.php?title=Exception_handling_syntax&oldid=736583603),
+[defer](https://web.archive.org/web/20160419202839/http://blog.golang.org/defer-panic-and-recover),
 or
-[defer](https://web.archive.org/web/20160419202839/http://blog.golang.org/defer-panic-and-recover)
+[trap](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#trap)
 statement), there is ill support for this across language barriers. Besides,
 most programming languages have a hard time offering a barrier like the one
 offered by a good old subprocess.
