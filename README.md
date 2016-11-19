@@ -61,9 +61,9 @@ argument to store it in a `TMPDIR` environment variable.
 This means that the following commands have a similar effect
 
 ```
-~$ ./tmpdir --keepwd echo %%TMPDIR
+~$ tmpdir --keepwd echo %%TMPDIR
 /tmp/tmpfSuRru
-~$ ./tmpdir --keepwd --env bash -c "echo \$TMPDIR"
+~$ tmpdir --keepwd --env bash -c "echo \$TMPDIR"
 /tmp/tmp6j4SWa
 ~$
 ```
