@@ -52,3 +52,25 @@ passwd
 /tmp/tmpLVfhmy$ diff -u passwd /etc/passwd
 /tmp/tmpLVfhmy$
 ```
+
+Changing the working directory might be intrusive to your scripts, so there is
+a `-k|--keepwd` option. To get a hold of the path to the working directory, you
+either list the special argument name `%%TMPDIR`, or use the `-e|--env`
+argument to store it in a `TMPDIR` environment variable.
+
+This means that the following commands have a similar effect
+
+```
+~$ ./tmpdir --keepwd echo %%TMPDIR
+/tmp/tmpfSuRru
+~$ ./tmpdir --keepwd --env bash -c "echo \$TMPDIR"
+/tmp/tmp6j4SWa
+~$
+```
+
+The argument `%%TMPDIR` is welcome to appear more than once in the argument
+list.
+
+You can mandate the parent directory of your temporary directory using the
+`-d|--dir` argument, and the prefix and postfix of the directory name using the
+`-p|--prefix` and `-s|--suffix` arguments.
