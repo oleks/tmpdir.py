@@ -17,4 +17,4 @@ test_keepwd_no_other_args:
 
 test_dir_dot:
 	./tmpdir --dir . bash -c "cd .. && pwd" | \
-		diff -u - <(echo $(cwd))
+		diff -u - <(echo $(cwd)) > /dev/null
