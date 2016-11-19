@@ -4,7 +4,8 @@ test: \
 	test_no_args \
 	test_retval \
 	test_keepwd_no_other_args \
-	test_dir_dot
+	test_dir_dot \
+	test_dir_tmpdir
 
 cwd=$(shell pwd)
 
@@ -22,3 +23,7 @@ test_keepwd_no_other_args:
 test_dir_dot:
 	./tmpdir --dir . bash -c "cd .. && pwd" | \
 		diff -u - <(echo $(cwd))
+
+test_dir_tmpdir:
+	"$(cwd)/tmpdir" --env bash -c \
+		"\"$(cwd)/tmpdir\" --dir \"\$$TMPDIR\" bash -c \"cd .. && pwd\" | diff -u - <(echo \$$TMPDIR)"
