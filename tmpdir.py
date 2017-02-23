@@ -96,7 +96,7 @@ def main_with_args(args):
     return retval
 
 
-def main():
+def parse_main_args(args = sys.argv):
     parser = argparse.ArgumentParser(
         description="""
 Do something with a temporary directory (TMPDIR).
@@ -150,8 +150,11 @@ stay in current working directory
 set the environment variable TMPDIR to the absolute path to
 the created tmpdir
 """)
-    args = parser.parse_args()
+    return parser.parse_args(args)
 
+
+def main():
+    args = parse_main_args()
     sys.exit(main_with_args(args))
 
 
