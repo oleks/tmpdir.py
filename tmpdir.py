@@ -96,7 +96,7 @@ def main_with_args(args):
     return retval
 
 
-def parse_main_args(args = sys.argv[1:]):
+def parse_main_args(args=sys.argv[1:]):
     parser = argparse.ArgumentParser(
         description="""
 Do something with a temporary directory (TMPDIR).
