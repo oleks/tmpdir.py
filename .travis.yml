@@ -9,4 +9,8 @@ python:
   - "3.5-dev"
   - "3.6-dev"
   - "nightly"
+install:
+  - pip install flake8
+before_script:
+  - flake8 .
 script: make test
