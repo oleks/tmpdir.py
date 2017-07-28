@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Do Something With A Temporary Directory
 # See also https://github.com/oleks/tmpdir.py
@@ -31,9 +31,11 @@ import subprocess
 import sys
 import tempfile
 
+from typing import List
+
 
 # http://stackoverflow.com/a/12514470/5801152
-def copytree(src, dst, symlinks):
+def copytree(src: str, dst: str, symlinks: bool) -> None:
     for item in os.listdir(src):
         s = os.path.join(src, item)
         d = os.path.join(dst, item)
@@ -96,7 +98,7 @@ def main_with_args(args):
     return retval
 
 
-def parse_main_args(args=sys.argv[1:]):
+def parse_main_args(args: List[str]=sys.argv[1:]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="""
 Do something with a temporary directory (TMPDIR).
