@@ -152,7 +152,11 @@ stay in current working directory
 set the environment variable TMPDIR to the absolute path to
 the created tmpdir
 """)
-    return parser.parse_args(args)
+
+    args = parser.parse_args(args)
+
+    if args.cwd and args.keepwd:
+        raise parser.error("--keepwd and --cwd are incompatible options")
 
 
 def main():
