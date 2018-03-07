@@ -31,7 +31,29 @@ import subprocess
 import sys
 import tempfile
 
+from contextlib import contextmanager
 from typing import List
+
+
+@contextmanager
+def tmpdir(copy=None,
+           dir=tempfile.gettempdir(),
+           prefix=tempfile.gettempprefix(),
+           suffix=""):
+
+    tmp = tempfile.mkdtemp(dir=dir, prefix=prefix, suffix=suffix)
+
+    try:
+        if copy:
+            if os.path.isfile(copy):
+                shutil.copy2(copy, tmp)
+            else:
+                copytree(copy, tmp)
+
+        yield tmp
+
+    finally:
+        shutil.rmtree(tmp)
 
 
 # http://stackoverflow.com/a/12514470/5801152
