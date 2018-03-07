@@ -3,6 +3,7 @@
 # Do Something With A Temporary Directory
 # See also https://github.com/oleks/tmpdir.py
 
+# Copyright (c) 2018 Nicolas Braud-Santoni <nicoo@realraum.at>
 # Copyright (c) 2016 Oleks <oleks@oleks.info>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,7 +32,29 @@ import subprocess
 import sys
 import tempfile
 
+from contextlib import contextmanager
 from typing import List
+
+
+@contextmanager
+def tmpdir(copy=None,
+           dir=tempfile.gettempdir(),
+           prefix=tempfile.gettempprefix(),
+           suffix=""):
+
+    tmp = tempfile.mkdtemp(dir=dir, prefix=prefix, suffix=suffix)
+
+    try:
+        if copy:
+            if os.path.isfile(copy):
+                shutil.copy2(copy, tmp)
+            else:
+                copytree(copy, tmp)
+
+        yield tmp
+
+    finally:
+        shutil.rmtree(tmp)
 
 
 # http://stackoverflow.com/a/12514470/5801152
@@ -45,57 +68,30 @@ def copytree(src: str, dst: str, symlinks: bool) -> None:
             shutil.copy2(s, d)
 
 
-def do_with_tmpdir(args, tmpdir):
-
-    if args.copy:
-        if os.path.isfile(args.copy):
-            shutil.copy2(args.copy, tmpdir)
-        else:
-            copytree(args.copy, tmpdir)
-
-    cwd = "."
-
-    had_tmpdir = False
-    for i, arg in enumerate(args.args):
-        if arg == "%%TMPDIR":
-            args.args[i] = tmpdir
-            had_tmpdir = True
-
-    if (args.cwd or not had_tmpdir) and not args.keepwd:
-        cwd = tmpdir
-
-    env = os.environ.copy()
-    if args.env:
-        env["TMPDIR"] = tmpdir
-
-    command = [args.command] + args.args
-
-    proc = subprocess.Popen(command, cwd=cwd, env=env)
-    return proc.wait()
-
-
 def main_with_args(args):
-    dir = tempfile.gettempdir()
-    if args.dir:
-        dir = args.dir
+    dict_args = vars(args)
+    tmpdir_args = { k: dict_args[k] for k in ['copy', 'dir', 'prefix', 'suffix'] }
 
-    prefix = tempfile.gettempprefix()
-    if args.prefix:
-        prefix = args.prefix
+    with tmpdir(**tmpdir_args) as tmp:
+        cwd = "."
 
-    suffix = ""
-    if args.suffix:
-        suffix = args.suffix
+        had_tmpdir = False
+        for i, arg in enumerate(args.args):
+            if arg == "%%TMPDIR":
+                args.args[i] = tmp
+                had_tmpdir = True
 
-    retval = 0
-    tmpdir = tempfile.mkdtemp(
-        dir=dir, prefix=prefix, suffix=suffix)
-    try:
-        retval = do_with_tmpdir(args, tmpdir)
-    finally:
-        shutil.rmtree(tmpdir)
+        if (args.cwd or not had_tmpdir) and not args.keepwd:
+            cwd = tmp
 
-    return retval
+        env = os.environ.copy()
+        if args.env:
+            env["TMPDIR"] = tmp
+
+        command = [args.command] + args.args
+
+        proc = subprocess.Popen(command, cwd=cwd, env=env)
+        return proc.wait()
 
 
 def parse_main_args(args: List[str]=sys.argv[1:]) -> argparse.Namespace:
