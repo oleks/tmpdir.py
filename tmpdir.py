@@ -3,6 +3,7 @@
 # Do Something With A Temporary Directory
 # See also https://github.com/oleks/tmpdir.py
 
+# Copyright (c) 2018 Nicolas Braud-Santoni <nicoo@realraum.at>
 # Copyright (c) 2016 Oleks <oleks@oleks.info>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
