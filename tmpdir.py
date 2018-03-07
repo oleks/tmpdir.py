@@ -70,7 +70,8 @@ def copytree(src: str, dst: str, symlinks: bool) -> None:
 
 def main_with_args(args):
     dict_args = vars(args)
-    tmpdir_args = { k: dict_args[k] for k in ['copy', 'dir', 'prefix', 'suffix'] }
+    TMPDIR_ARGS = ['copy', 'dir', 'prefix', 'suffix']
+    tmpdir_args = {k: dict_args[k] for k in TMPDIR_ARGS}
 
     with tmpdir(**tmpdir_args) as tmp:
         cwd = "."
