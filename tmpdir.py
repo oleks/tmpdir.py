@@ -158,6 +158,8 @@ the created tmpdir
     if args.cwd and args.keepwd:
         raise parser.error("--keepwd and --cwd are incompatible options")
 
+    return args
+
 
 def main():
     args = parse_main_args()
